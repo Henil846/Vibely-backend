@@ -14,7 +14,7 @@ app.use(cors({
     "http://localhost:5174",
     "http://localhost:3000",
     "https://henil846.github.io",
-    "https://vibely-backend.onrender.com",
+    "https://vibely-backend-delta.vercel.app",
   ],
   credentials: true,
 }));
