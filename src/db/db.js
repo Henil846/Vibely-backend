@@ -1,14 +1,25 @@
 const mongoose = require("mongoose");
-const dns = require("dns");
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
+let isConnected = false;
 
 async function connectDB() {
+  if (isConnected) {
+    return;
+  }
+
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    const opts = {
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 45000,
+    };
+
+    await mongoose.connect(process.env.MONGO_URI, opts);
+    isConnected = true;
     console.log("Connected to database");
   } catch (err) {
-    console.error("Error connecting to MongoDB:", err);
-    process.exit(1);
+    console.error("Error connecting to MongoDB:", err.message);
+    // In serverless, don't exit — just throw so the request fails gracefully
+    throw err;
   }
 }
 

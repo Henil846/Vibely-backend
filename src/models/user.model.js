@@ -196,6 +196,48 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+
+    // Social — Connections (friend system)
+    connections: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
+    },
+
+    connectionCount: {
+      type: Number,
+      default: 0,
+    },
+
+    // Social — Followers/Following
+    followers: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
+    },
+
+    following: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
+    },
+
+    followersCount: {
+      type: Number,
+      default: 0,
+    },
+
+    followingCount: {
+      type: Number,
+      default: 0,
+    },
+
+    // Follow approval: "auto" = anyone can follow instantly, "manual" = requires approval
+    followApproval: {
+      type: String,
+      default: "auto",
+      enum: ["auto", "manual"],
+    },
   },
   { timestamps: true }
 );

@@ -152,6 +152,7 @@ async function registerUser(req, res) {
     res.status(201).json({
       message: "User Registered Successfully.",
       user: userObj,
+      token,
     });
   } catch (err) {
     console.error("Register error:", err);
@@ -210,6 +211,7 @@ async function loginUser(req, res) {
     return res.status(200).json({
       message: "User logged in successfully",
       user: userObj,
+      token,
     });
   } catch (err) {
     console.error("Login error:", err);

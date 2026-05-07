@@ -4,12 +4,14 @@ const connectDB = require("./src/db/db");
 
 const PORT = process.env.PORT || 3000;
 
-// Connect to database
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+// For local development: connect DB and start server
+if (process.env.NODE_ENV !== "production") {
+  connectDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
   });
-});
+}
 
 // Export for Vercel serverless
 module.exports = app;

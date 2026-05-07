@@ -33,6 +33,7 @@ async function updateProfile(req, res) {
       "communicationMode",
       "privacy",
       "isOnline",
+      "followApproval",
     ];
 
     const updates = {};
