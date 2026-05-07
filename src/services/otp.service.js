@@ -64,9 +64,9 @@ async function sendOTP(email) {
     await transporter.sendMail(mailOptions);
     console.log(`✅ OTP sent to ${email} via email: ${otp}`);
   } catch (err) {
-    // If email fails (e.g. bad app password), log OTP to console as fallback
-    console.warn(`⚠️  Email sending failed: ${err.message}`);
-    console.log(`📧 OTP for ${email}: ${otp} (check console — email delivery failed)`);
+    console.error(`❌ Email sending failed: ${err.message}`);
+    console.log(`📧 OTP for ${email}: ${otp} (email delivery failed)`);
+    throw new Error(`Email sending failed: ${err.message}`);
   }
 
   return true;
