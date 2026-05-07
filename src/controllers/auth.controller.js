@@ -25,11 +25,12 @@ async function sendEmailOTP(req, res) {
 
     return res.status(200).json({
       message: "OTP sent successfully to your email.",
+      sentVia: process.env.GMAIL_USER ? process.env.GMAIL_USER.substring(0, 5) + "***" : "NO_GMAIL_USER_SET",
     });
   } catch (err) {
     console.error("Send OTP error:", err);
     return res.status(500).json({
-      message: "Failed to send OTP. Please try again.",
+      message: "Failed to send OTP: " + err.message,
     });
   }
 }
